@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiauMatch - Adote um Gato</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../imagens/logo.png" alt="MiauMatch" style="height:80px; vertical-align:middle;">
+            </div>
+            <div class="nav-links">
+                <a href="#sobre">Sobre</a>
+                <a href="#pets">Gatos</a>
+                <a href="#contato">Contato</a>
+                <div id="user-info" style="display: none; align-items: center; gap: 0.5rem;">
+                    <img id="profile-pic" src="" alt="Foto de perfil" style="display:none; width:36px; height:36px; border-radius:50%; object-fit:cover;">
+                    <span id="user-name"></span>
+                    <button id="edit-profile-btn" title="Editar perfil">✏️</button>
+                    <button id="logout-btn">Sair</button>
+                </div>
+                <button id="login-btn">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Dê um Lar para um Gato</h1>
+            <p>Encontre seu companheiro felino perfeito e mude uma vida para sempre.</p>
+            <a href="#pets" class="cta-button">Ver Gatos Disponíveis</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <h2>Sobre Nós</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>O MiauMatch é uma plataforma dedicada a encontrar lares amorosos para gatos abandonados. Nossa missão é:</p>
+                <ul>
+                    <li>Conectar gatos resgatados com famílias amorosas</li>
+                    <li>Promover a adoção responsável</li>
+                    <li>Educar sobre o cuidado com animais</li>
+                    <li>Reduzir o número de gatos nas ruas</li>
+                </ul>
+            </div>
+            <div class="about-stats">
+                <div class="stat">
+                    <i class="fas fa-cat"></i>
+                    <h3>500+</h3>
+                    <p>Gatos Resgatados</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-home"></i>
+                    <h3>300+</h3>
+                    <p>Adoções Realizadas</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <h3>100%</h3>
+                    <p>Amor Garantido</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pets" id="pets">
+        <h2 style="text-align:center;">Gatos Disponíveis</h2>
+        <div id="admin-add-cat" style="display:none; text-align:center; margin-bottom: 1rem;">
+            <button id="show-add-cat-form">Adicionar Gato</button>
+        </div>
+        <form id="add-cat-form" style="display:none; max-width:400px; margin:0 auto; background:#f5f5f5; padding:1rem; border-radius:8px;">
+            <h3>Adicionar Novo Gato</h3>
+            <div class="form-group">
+                <label for="cat-name">Nome</label>
+                <input type="text" id="cat-name" required>
+            </div>
+            <div class="form-group">
+                <label for="cat-age">Idade</label>
+                <input type="text" id="cat-age" required>
+            </div>
+            <div class="form-group">
+                <label for="cat-gender">Gênero</label>
+                <input type="text" id="cat-gender" required>
+            </div>
+            <div class="form-group">
+                <label for="cat-description">Descrição</label>
+                <textarea id="cat-description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cat-image">URL da Imagem</label>
+                <input type="text" id="cat-image" required>
+            </div>
+            <button type="submit">Adicionar</button>
+            <button type="button" id="cancel-add-cat">Cancelar</button>
+        </form>
+        <div class="pets-grid"></div>
+    </section>
+
+    <!-- Modal de Adoção -->
+    <div id="adoptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Formulário de Adoção</h2>
+            <form id="adoptionForm">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Endereço</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <button type="submit">Enviar Solicitação</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Entrar</button>
+                <p>Não tem uma conta? <a href="#" id="show-register">Cadastre-se</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cadastro</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="register-name">Nome Completo</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Telefone</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-photo">Foto de Perfil (opcional)</label>
+                    <input type="file" id="register-photo" accept="image/*">
+                </div>
+                <button type="submit">Cadastrar</button>
+                <p>Já tem uma conta? <a href="#" id="show-login">Faça login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de edição de perfil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Perfil</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="profile-photo">Foto de Perfil</label>
+                    <input type="file" id="profile-photo" accept="image/*">
+                </div>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção de Minhas Adoções (visível apenas para usuários logados) -->
+    <section id="minhas-adocoes" class="pets" style="display: none;">
+        <h2>Minhas Adoções</h2>
+        <div class="pets-grid" id="minhas-adocoes-grid">
+            <!-- As adoções do usuário serão inseridas aqui via JavaScript -->
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>Email: contato@MiauMatch.com</p>
+                <p>Telefone: (88) 9999-9999</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Horário de Funcionamento</h3>
+                <p>Segunda a Sexta: 9h às 18h</p>
+                <p>Sábado: 9h às 14h</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MiauMatch. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
